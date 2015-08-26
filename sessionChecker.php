@@ -60,14 +60,14 @@
     }
   }
   function sessionChecker(){
-	if(typeof(Worker) !== "undefined") { sessionWorker.terminate(); sessionWorker=undefined; }
-	else clearTimeout(sessionTimerRefresh);
 	var sUrl="backend.php?function=sessionChecker";
 	$.ajax({
 	  url:sUrl,
 	  success:function(data){
-		/**Timer Reset**/
-		sessionLifeTime=1440;
+	    if(typeof(Worker) !== "undefined") { sessionWorker.terminate(); sessionWorker=undefined; }
+	    else clearTimeout(sessionTimerRefresh);
+	    /**Timer Reset**/
+	    sessionLifeTime=1440;
 	    sessionTimerRun();
 	  }
 	});
